@@ -18,4 +18,18 @@ function connectPost()
         return $resultats['idUtilisateur'];
     }
 }
+
+
+function getCours()
+{
+    global $PDO;
+    $query = "SELECT * FROM cours WHERE idCours in (SELECT idCours FROM cours_relation WHERE idUtilisateur=?) ";
+    $data = array($_POST['idUtilisateur']);
+    $statement = $PDO->prepare($query); //Preparation
+    $exec = $statement->execute($data); //execution
+    $resultats = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $resultats
+
+}
 ?>
