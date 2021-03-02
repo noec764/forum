@@ -1,8 +1,8 @@
 <?php
 
-$mysqlHost= 'localhost';
+$mysqlHost= 'forum';
 $mysqlDB='bddforum';
 $charset= 'utf8';
 $mysqlLogin='root';
-$mysqlPassword = 'M2#9AF8NBw8zTQ';
+$mysqlPassword = '%FnvQcYZs9!2Jf';
 ?>

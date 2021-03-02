@@ -32,6 +32,7 @@ function sendError ($reason) {
 // le script du backend permettant de réaliser l'authentification de l'utilisateur.
 // Attention: ce script ne doit contenir qu'un session_start() suivi de déclarations
 // de fonctions. Il ne doit pas exécuter d'autre code.
+
 require_once 'auth.php';
 
 
