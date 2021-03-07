@@ -130,9 +130,8 @@ function searchIdTopic()
 function verifyTopic()
 {
     global $PDO;
-
-    $query = "SELECT titreTopic FROM topic ";
-    $data = array();
+    $query = "SELECT titreTopic FROM topic WHERE idCours=?";
+    $data = array($_POST['idCours']);
     try {
         $prepare = $PDO->prepare($query);
         $prepare->execute($data);
@@ -142,7 +141,14 @@ function verifyTopic()
         print_r(array('ERROR' => " Erreur ! " . $e->getMessage(), 'SQL' => $query, 'datas' => $data));
         exit();
     }
-    print_r($resultats[0]);
+
+    print_r($resultats);
+    foreach ($resultats as $res){
+        if ($_POST['newTopic']==$res['titreTopic']){
+            return FALSE;
+        }
+    }
+    return TRUE;
 
 }
 
