@@ -141,10 +141,8 @@ function verifyTopic()
         print_r(array('ERROR' => " Erreur ! " . $e->getMessage(), 'SQL' => $query, 'datas' => $data));
         exit();
     }
-
-    print_r($resultats);
-    foreach ($resultats as $res){
-        if ($_POST['newTopic']==$res['titreTopic']){
+    foreach ($resultats as $res) {
+        if ($_POST['newTopic'] == $res['titreTopic']) {
             return FALSE;
         }
     }
@@ -165,15 +163,20 @@ function addTopic()
 
         $exec = $prepare->execute($data);
         $resultats = $prepare->fetchAll(PDO::FETCH_ASSOC);
+        if ($exec === TRUE) {
+            $query2 = "UPDATE cours SET nbTopics = nbTopics + 1 WHERE idCours = ?";
+            $data2 = array($_POST['idCours']);
+            $statement2 = $PDO->prepare($query2);
+            $statement2->execute($data2);
+        }
 
     } catch (Exception $e) {
-        // en cas d'erreur :
         print_r(array('ERROR' => " Erreur ! " . $e->getMessage(), 'SQL' => $query, 'datas' => $data));
         exit();
     }
     if ($exec == TRUE) {
         sendMessage($id);
-    }else{
+    } else {
         sendError("Quelque chose ne s'est pas bien passé");
     }
 }
