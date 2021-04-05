@@ -71,8 +71,23 @@ function updateNbTopic(idCours) {
     });
 }
 
+
+function checkLoginSes(login,password){
+    const query = `
+        SELECT login,password,idUtilisateur FROM ${config.mysqlUser} WHERE login=? AND password=?`;
+    const data = [login, password];
+
+    return new Promise((resolve, reject) => {
+        db.query(query, data, (err, rows) => {
+            if (err) return reject(err);
+            resolve(rows)
+        });
+    });
+}
+
 module.exports.updateNbTopic = updateNbTopic;
 module.exports.saveNewTopicQueries = saveNewTopicQueries;
 module.exports.getCoursUser = getCoursUser;
 module.exports.getTopicsCours = getTopicsCours;
 module.exports.getPostTopic = getPostTopic;
+module.exports.checkLoginSes = checkLoginSes;

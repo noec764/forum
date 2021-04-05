@@ -81,7 +81,7 @@ function decodeSessionCookie(req) {
         return token;
     }
     catch (err) {
-        return {userId: -1};
+        return {userId: -2};
     }
 }
 module.exports.decodeSessionCookie = decodeSessionCookie;

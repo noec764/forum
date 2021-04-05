@@ -10,9 +10,14 @@ const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 // permet d'éviter le problème de CORS que l'on avait déjà vu
 const cors = require('cors');
-app.use(cors({origin: 'http://localhost:4200', credentials: true}));
+app.use(cors({origin: 'http://127.0.0.1:4200', credentials: true}));
+
 
 // ici, on met en place les routes qui seront servies par le serveur web :
 // chaque route correspond à un fichier que l'on charge via un require. Ce
@@ -23,6 +28,7 @@ const getCours = require('./getCours');
 const getTopics = require('./getTopics')
 const getPost = require('./getPost');
 const saveNewTopic = require('./saveNewTopic');
+const checkLogin = require("./checkLogin");
 
 
 app.post('/getPost', (req, res) => {
@@ -37,13 +43,17 @@ app.post('/getCours', (req, res) => {
     getCours(req, res);
 });
 
+
 app.post('/getTopics', (req, res) => {
     getTopics(req, res);
+});
+
+app.post('/checkLogin', (req, res) => {
+    checkLogin(req, res);
 });
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
 });
 
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+

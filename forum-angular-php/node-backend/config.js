@@ -9,7 +9,8 @@ const config = {
     // les noms des tables
     mysqlCours:    'cours',
     mysqlTopic:   'topic',
-    mysqlPost:     'post'
+    mysqlPost:     'post',
+    mysqlUser:     'utilisateur'
 };
 
 // on exporte la config. En l'exportant comme ci-dessous, on pourra utiliser la
